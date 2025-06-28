@@ -29,3 +29,18 @@ class CivicChain(ARC4Contract):
         App.localPut(Txn.sender, voted_key, Int(1))
         self.vote_count += arc4.Uint64(1)
 
+    @arc4.abimethod()
+    def release_funds(self, receiver: arc4.Address):
+        from algopy import Txn, Assert, InnerTxnBuilder, TxnField, TxnType
+        quorum = arc4.Uint64(3)
+        Assert(self.vote_count >= quorum)
+        Assert(Txn.sender == self.admin)
+
+        InnerTxnBuilder.Begin()
+        InnerTxnBuilder.SetFields({
+            TxnField.type_enum: TxnType.Payment,
+            TxnField.amount: self.budget.unwrap(),
+            TxnField.receiver: receiver.encode()
+        })
+        InnerTxnBuilder.Submit()
+
