@@ -1,12 +1,44 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AlgoKit React Template</title>
+    <title>CivicChain | Citizen Budget Governance</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="main.js"></script>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <header>
+      <h1>CivicChain — On-Chain Budget Voting</h1>
+      <button id="connectWallet">Connect Wallet</button>
+    </header>
+
+    <main>
+      <section class="proposal-section">
+        <h2>Active Proposal</h2>
+        <p id="proposalText">Loading...</p>
+        <p><strong>Budget:</strong> <span id="budgetAmount">0</span> Algos</p>
+        <p><strong>Vote Count:</strong> <span id="voteCount">0</span></p>
+        <button id="voteButton">Vote</button>
+      </section>
+
+      <section class="admin-section">
+        <h2>Admin Panel</h2>
+        <form id="updateProposalForm">
+          <input type="text" id="proposalInput" placeholder="New Proposal" required />
+          <input type="number" id="budgetInput" placeholder="Budget (in microAlgos)" required />
+          <button type="submit">Update Proposal</button>
+        </form>
+        <form id="releaseFundsForm">
+          <input type="text" id="receiverInput" placeholder="Receiver Address" required />
+          <button type="submit">Release Funds</button>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2025 CivicChain. Empowering transparent governance on Algorand.</p>
+    </footer>
   </body>
 </html>
