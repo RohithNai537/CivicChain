@@ -59,3 +59,9 @@ class CivicChain(ARC4Contract):
     status = App.localGet(Txn.sender, voted_key)
     return arc4.Bool(status == Int(1))
 
+  @arc4.abimethod()
+   def get_voter_status(self, addr: arc4.Address) -> arc4.Bool:
+     from algopy import App, Int
+     voted_key = arc4.Bytes("voted_" + addr.encode())
+     return arc4.Bool(App.localGet(addr, voted_key) == Int(1))
+
