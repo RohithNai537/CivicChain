@@ -44,3 +44,10 @@ class CivicChain(ARC4Contract):
         })
         InnerTxnBuilder.Submit()
 
+    @arc4.abimethod()
+    def reset_votes(self):
+     from algopy import Txn, Assert
+
+      Assert(Txn.sender == self.admin, comment="Only admin can reset votes")
+      self.vote_count = arc4.Uint64(0)
+
