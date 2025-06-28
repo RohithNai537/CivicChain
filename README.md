@@ -1,45 +1,118 @@
-# CivicChain
+<p align="center">
+  <img src="projects/CivicChain-frontend/public/Algocc_logo.png" alt="CivicChain Logo" width="600" />
+</p>
 
-This starter full stack project has been generated using AlgoKit. See below for default getting started instructions.
+# CivicChain — On-Chain Citizen Budget Participation Platform
 
-## Setup
+---
 
-### Initial setup
-1. Clone this repository to your local machine.
-2. Ensure [Docker](https://www.docker.com/) is installed and operational. Then, install `AlgoKit` following this [guide](https://github.com/algorandfoundation/algokit-cli#install).
-3. Run `algokit project bootstrap all` in the project directory. This command sets up your environment by installing necessary dependencies, setting up a Python virtual environment, and preparing your `.env` file.
-4. In the case of a smart contract project, execute `algokit generate env-file -a target_network localnet` from the `CivicChain-contracts` directory to create a `.env.localnet` file with default configuration for `localnet`.
-5. To build your project, execute `algokit project run build`. This compiles your project and prepares it for running.
-6. For project-specific instructions, refer to the READMEs of the child projects:
-   - Smart Contracts: [CivicChain-contracts](projects/CivicChain-contracts/README.md)
-   - Frontend Application: [CivicChain-frontend](projects/CivicChain-frontend/README.md)
+## 🎯 Problem Statement
+Local governments manage public funds but often lack transparency and citizen involvement in budgeting and spending decisions. This limited openness causes mistrust, inefficient resource allocation, and increased risk of misuse. The absence of participatory and accountable budget processes weakens public confidence and government accountability. CivicChain addresses these challenges by enabling transparent, on-chain citizen participation using blockchain technology.
 
-> This project is structured as a monorepo, refer to the [documentation](https://github.com/algorandfoundation/algokit-cli/blob/main/docs/features/project/run.md) to learn more about custom command orchestration via `algokit project run`.
 
-### Subsequently
+---
 
-1. If you update to the latest source code and there are new dependencies, you will need to run `algokit project bootstrap all` again.
-2. Follow step 3 above.
+## 💡 Solution
 
-## Tools
+CivicChain empowers citizens to actively participate in local budget decisions by distributing voting tokens (Algorand Standard Assets - ASAs) based on their residency or tax contributions. Using a decentralized autonomous organization (DAO) on the Algorand blockchain, citizens can securely vote on municipal budget proposals. Smart contracts automatically release funds only when proposals achieve the required quorum, ensuring transparent, accountable, and democratic management of public resources.
 
-This project makes use of Python and React to build Algorand smart contracts and to provide a base project configuration to develop frontends for your Algorand dApps and interactions with smart contracts. The following tools are in use:
+---
 
-- Algorand, AlgoKit, and AlgoKit Utils
-- Python dependencies including Poetry, Black, Ruff or Flake8, mypy, pytest, and pip-audit
-- React and related dependencies including AlgoKit Utils, Tailwind CSS, daisyUI, use-wallet, npm, jest, playwright, Prettier, ESLint, and Github Actions workflows for build validation
+## 🤝 User Value
+- Direct citizen participation in local governance
+- Transparent, verifiable budget usage
+- Increased public accountability for government spending
 
-### VS Code
+---
 
-It has also been configured to have a productive dev experience out of the box in [VS Code](https://code.visualstudio.com/), see the [backend .vscode](./backend/.vscode) and [frontend .vscode](./frontend/.vscode) folders for more details.
+## 🔗 Algorand Ecosystem Value
+- Real-world DAO application showcasing Algorand’s strengths
+- Uses ASAs for voting tokens and PyTeal smart contracts for fund disbursement logic
+- Demonstrates scalable, low-cost blockchain governance for the public sector
 
-## Integrating with smart contracts and application clients
+---
 
-Refer to the [CivicChain-contracts](projects/CivicChain-contracts/README.md) folder for overview of working with smart contracts, [projects/CivicChain-frontend](projects/CivicChain-frontend/README.md) for overview of the React project and the [projects/CivicChain-frontend/contracts](projects/CivicChain-frontend/src/contracts/README.md) folder for README on adding new smart contracts from backend as application clients on your frontend. The templates provided in these folders will help you get started.
-When you compile and generate smart contract artifacts, your frontend component will automatically generate typescript application clients from smart contract artifacts and move them to `frontend/src/contracts` folder, see [`generate:app-clients` in package.json](projects/CivicChain-frontend/package.json). Afterwards, you are free to import and use them in your frontend application.
+## 🚀 Purpose & Vision
+Create a trustless, transparent budgeting platform that bridges governments and citizens, promoting democratic governance and responsible public spending.
 
-The frontend starter also provides an example of interactions with your CivicChainClient in [`AppCalls.tsx`](projects/CivicChain-frontend/src/components/AppCalls.tsx) component by default.
+---
 
-## Next Steps
+## 🛠️ Tech Stack
+| Layer            | Technologies / Tools                         |
+|------------------|---------------------------------------------|
+| Smart Contracts   | PyTeal (via AlgoKit)                         |
+| Tokenization     | Algorand Standard Assets (ASA)               |
+| Voting Logic     | Beaker Framework + Algorand Stateful Contracts|
+| Wallet Integration| Pera Wallet + WalletConnect (React)          |
+| Frontend         | React, Tailwind CSS, Algorand SDK             |
+| Storage (Optional)| IPFS (for proposals and documents)           |
 
-You can take this project and customize it to build your own decentralized applications on Algorand. Make sure to understand how to use AlgoKit and how to write smart contracts for Algorand before you start.
+---
+
+## ⚙️ Using AlgoKit
+This project leverages AlgoKit to simplify Algorand smart contract development, testing, and deployment, speeding up the MVP development and enhancing scalability.
+
+---
+
+## 📦 Features (MVP)
+| Feature              | Purpose                                    |
+|----------------------|--------------------------------------------|
+| Proposal Creation    | Admins submit municipal budget proposals  |
+| Token Distribution  | Voting tokens assigned to verified citizens|
+| On-Chain Voting     | DAO-based voting with quorum verification  |
+| Fund Release Logic  | Smart contract automates fund disbursement |
+| Public Dashboard    | Real-time visibility of proposals and results |
+
+---
+
+## 🧭 MVP Workflow
+1. Admin Council creates a budget proposal (e.g., ₹5L for road repairs)
+2. Citizens receive voting tokens (ASAs)
+3. Citizens cast votes on proposals via the DAO
+4. If quorum is met, smart contract releases funds to the project
+5. Dashboard updates public records transparently
+
+---
+
+## 🚀 Installation & Setup (with AlgoKit)
+
+### Prerequisites
+- Python 3.10+, Node.js 16+, Docker
+- [AlgoKit CLI](https://github.com/algorandfoundation/algokit-cli)
+
+### Steps
+
+###  1. Install AlgoKit
+
+###  2. Clone the repo
+`git clone https://github.com/your-org/civicchain.git`
+
+`cd civicchain`
+
+###  3. Install dependencies
+`npm install `                         # For frontend 
+
+###  4. Start localnet and deploy
+`algokit localnet start`
+
+`algokit deploy`
+
+---
+
+## 🤝 Contributing
+Contributions are welcome! Please fork the repo and submit pull requests for bug fixes, features, or improvements.
+
+---
+
+
+## 📞 Contact
+For questions, collaboration, or support:  
+**Mulinti Rohith Naidu**
+
+Email: mulintirohan159@gmail.com 
+
+
+---
+
+> _“CivicChain — Empowering citizens with transparent governance on Algorand.”_
+
