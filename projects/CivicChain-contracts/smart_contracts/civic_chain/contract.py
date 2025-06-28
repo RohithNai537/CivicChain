@@ -12,3 +12,12 @@ class CivicChain(ARC4Contract):
         self.proposal = proposal
         self.budget = budget
         self.vote_count = arc4.Uint64(0)
+
+      @arc4.abimethod()
+    def update_proposal(self, proposal: arc4.String, budget: arc4.Uint64):
+        from algopy import Txn, Assert
+        Assert(Txn.sender == self.admin)
+        self.proposal = proposal
+        self.budget = budget
+        self.vote_count = arc4.Uint64(0)
+
