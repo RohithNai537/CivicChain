@@ -1,8 +1,14 @@
-from algopy import ARC4Contract, String
-from algopy.arc4 import abimethod
-
+from algopy import ARC4Contract, arc4
 
 class CivicChain(ARC4Contract):
-    @abimethod()
-    def hello(self, name: String) -> String:
-        return "Hello, " + name
+    admin: arc4.Address
+    proposal: arc4.String
+    budget: arc4.Uint64
+    vote_count: arc4.Uint64
+
+    @arc4.abimethod(create=True)
+    def create(self, admin: arc4.Address, proposal: arc4.String, budget: arc4.Uint64):
+        self.admin = admin
+        self.proposal = proposal
+        self.budget = budget
+        self.vote_count = arc4.Uint64(0)
