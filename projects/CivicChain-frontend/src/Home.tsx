@@ -25,48 +25,38 @@ const Home: React.FC<HomeProps> = () => {
     setAppCallsDemoModal(!appCallsDemoModal)
   }
 
-  return (
-    <div className="hero min-h-screen bg-teal-400">
-      <div className="hero-content text-center rounded-lg p-6 max-w-md bg-white mx-auto">
-        <div className="max-w-md">
-          <h1 className="text-4xl">
-            Welcome to <div className="font-bold">AlgoKit 🙂</div>
+ return (
+    <div className="hero min-h-screen bg-gradient-to-br from-green-300 to-teal-500">
+      <div className="hero-content text-center rounded-lg p-6 max-w-3xl bg-white shadow-xl mx-auto">
+        <div>
+          <h1 className="text-4xl font-bold mb-2 text-gray-800">
+            CivicChain <span className="text-teal-600">— On-Chain Budget Participation</span>
           </h1>
-          <p className="py-6">
-            This starter has been generated using official AlgoKit React template. Refer to the resource below for next steps.
+          <p className="py-4 text-gray-600">
+            Participate in local governance with transparent voting on budget proposals via Algorand blockchain.
           </p>
 
-          <div className="grid">
-            <a
-              data-test-id="getting-started"
-              className="btn btn-primary m-2"
-              target="_blank"
-              href="https://github.com/algorandfoundation/algokit-cli"
+          <div className="mb-6">
+            <button
+              data-test-id="connect-wallet"
+              className="btn btn-accent"
+              onClick={toggleWalletModal}
             >
-              Getting started
-            </a>
-
-            <div className="divider" />
-            <button data-test-id="connect-wallet" className="btn m-2" onClick={toggleWalletModal}>
-              Wallet Connection
+              {activeAddress ? `Connected: ${activeAddress.slice(0, 6)}...` : 'Connect Wallet'}
             </button>
-
-            {activeAddress && (
-              <button data-test-id="transactions-demo" className="btn m-2" onClick={toggleDemoModal}>
-                Transactions Demo
-              </button>
-            )}
-
-            {activeAddress && (
-              <button data-test-id="appcalls-demo" className="btn m-2" onClick={toggleAppCallsModal}>
-                Contract Interactions Demo
-              </button>
-            )}
           </div>
 
+          {activeAddress ? (
+            <div>
+              <ProposalSection />
+              <div className="divider"></div>
+              <AdminPanel />
+            </div>
+          ) : (
+            <p className="text-sm text-gray-500">Please connect your wallet to view and vote on proposals.</p>
+          )}
+
           <ConnectWallet openModal={openWalletModal} closeModal={toggleWalletModal} />
-          <Transact openModal={openDemoModal} setModalState={setOpenDemoModal} />
-          <AppCalls openModal={appCallsDemoModal} setModalState={setAppCallsDemoModal} />
         </div>
       </div>
     </div>
