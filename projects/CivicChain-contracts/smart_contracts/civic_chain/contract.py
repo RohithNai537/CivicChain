@@ -51,3 +51,11 @@ class CivicChain(ARC4Contract):
       Assert(Txn.sender == self.admin, comment="Only admin can reset votes")
       self.vote_count = arc4.Uint64(0)
 
+   @arc4.abimethod()
+   def has_voted(self) -> arc4.Bool:
+     from algopy import Txn, App, Int
+
+    voted_key = arc4.Bytes("voted_" + Txn.sender.encode())
+    status = App.localGet(Txn.sender, voted_key)
+    return arc4.Bool(status == Int(1))
+
