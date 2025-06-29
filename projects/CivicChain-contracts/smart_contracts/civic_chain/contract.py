@@ -90,6 +90,19 @@ def update_quorum(self, new_quorum: arc4.Uint64):
     from algopy import Txn, Assert
     Assert(Txn.sender == self.admin, comment="Only admin can update quorum")
     self.quorum = new_quorum
+    
+@arc4.abimethod()
+def withdraw_unspent(self, amount: arc4.Uint64, receiver: arc4.Address):
+    from algopy import Txn, Assert, InnerTxnBuilder, TxnField, TxnType
+    Assert(Txn.sender == self.admin, comment="Only admin can withdraw")
+    
+    InnerTxnBuilder.Begin()
+    InnerTxnBuilder.SetFields({
+        TxnField.type_enum: TxnType.Payment,
+        TxnField.amount: amount.unwrap(),
+        TxnField.receiver: receiver.encode()
+    })
+    InnerTxnBuilder.Submit()
 
 
 
