@@ -75,5 +75,22 @@ def change_admin(self, new_admin: arc4.Address):
     Assert(Txn.sender == self.admin, comment="Only admin can change admin")
     self.admin = new_admin
 
+quorum: arc4.Uint64  # Add this as a global variable in class
+
+@arc4.abimethod(create=True)
+def create(self, admin: arc4.Address, proposal: arc4.String, budget: arc4.Uint64, quorum: arc4.Uint64):
+    self.admin = admin
+    self.proposal = proposal
+    self.budget = budget
+    self.vote_count = arc4.Uint64(0)
+    self.quorum = quorum
+
+@arc4.abimethod()
+def update_quorum(self, new_quorum: arc4.Uint64):
+    from algopy import Txn, Assert
+    Assert(Txn.sender == self.admin, comment="Only admin can update quorum")
+    self.quorum = new_quorum
+
+
 
 
