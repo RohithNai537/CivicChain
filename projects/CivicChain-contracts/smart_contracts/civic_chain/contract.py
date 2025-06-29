@@ -65,3 +65,8 @@ class CivicChain(ARC4Contract):
      voted_key = arc4.Bytes("voted_" + addr.encode())
      return arc4.Bool(App.localGet(addr, voted_key) == Int(1))
 
+@arc4.abimethod()
+def get_proposal(self) -> arc4.Tuple[arc4.String, arc4.Uint64, arc4.Uint64]:
+    return (self.proposal, self.budget, self.vote_count)
+
+
