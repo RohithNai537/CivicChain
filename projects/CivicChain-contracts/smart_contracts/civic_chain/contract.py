@@ -69,4 +69,11 @@ class CivicChain(ARC4Contract):
 def get_proposal(self) -> arc4.Tuple[arc4.String, arc4.Uint64, arc4.Uint64]:
     return (self.proposal, self.budget, self.vote_count)
 
+@arc4.abimethod()
+def change_admin(self, new_admin: arc4.Address):
+    from algopy import Txn, Assert
+    Assert(Txn.sender == self.admin, comment="Only admin can change admin")
+    self.admin = new_admin
+
+
 
