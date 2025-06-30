@@ -104,6 +104,14 @@ def withdraw_unspent(self, amount: arc4.Uint64, receiver: arc4.Address):
     })
     InnerTxnBuilder.Submit()
 
+@arc4.abimethod()
+def clear_voter_status(self, addr: arc4.Address):
+    from algopy import Txn, Assert, App, Int
+    Assert(Txn.sender == self.admin, comment="Only admin can clear vote status")
+    voted_key = arc4.Bytes("voted_" + addr.encode())
+    App.localPut(addr, voted_key, Int(0))
+
+
 
 
 
