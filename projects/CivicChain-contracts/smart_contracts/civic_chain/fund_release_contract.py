@@ -34,3 +34,16 @@ def update_budget(self, new_budget: arc4.Uint64):
     Assert(Txn.sender == self.admin, comment="Only admin can update budget")
     self.budget = new_budget
 
+@abimethod()
+def withdraw_remaining_funds(self, amount: arc4.Uint64, receiver: arc4.Address):
+    Assert(Txn.sender == self.admin, comment="Only admin can withdraw funds")
+
+    InnerTxnBuilder.Begin()
+    InnerTxnBuilder.SetFields({
+        TxnField.type_enum: TxnType.Payment,
+        TxnField.amount: amount.unwrap(),
+        TxnField.receiver: receiver.encode()
+    })
+    InnerTxnBuilder.Submit()
+
+
