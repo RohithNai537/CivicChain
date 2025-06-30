@@ -27,3 +27,10 @@ class FundReleaseContract(ARC4Contract):
             TxnField.receiver: receiver.encode()
         })
         InnerTxnBuilder.Submit()
+
+
+@abimethod()
+def update_budget(self, new_budget: arc4.Uint64):
+    Assert(Txn.sender == self.admin, comment="Only admin can update budget")
+    self.budget = new_budget
+
